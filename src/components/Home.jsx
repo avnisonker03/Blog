@@ -83,8 +83,8 @@ export default function Home() {
     }
 
     return (
-        <div className="md:flex-row flex flex-col items-center mt-4 md:mt-0">
-            <div className="md:w-full w-1/2 max-w-3xl text-center">
+        <div className="md:flex-row flex flex-col items-center mt-4 md:mt-0 overflow-x-hidden">
+            <div className="md:w-full w-full max-w-3xl text-center">
                 <div className="text-pink-300">
                     <h1 className="font-semibold md:text-4xl text-2xl p-4">{displayedText}</h1>
                     <p className="text-xl mt-2 p-2">Discover in-depth articles on technology, lifestyle, and more.</p>
@@ -96,7 +96,7 @@ export default function Home() {
                     Start Exploring
                 </button>
             </div>
-            <div className="md:w-3/4 w-1/2 mt-8 p-4">
+            <div className="md:w-3/4 w-full mt-8 p-4">
                 <Container>
                     <div className="flex flex-wrap md:flex-row flex-col md:mt-0 mt-4">
                         {displayedPosts.map((post) => (
@@ -109,6 +109,7 @@ export default function Home() {
             </div>
         </div>
     );
+ 
 }
 
 
