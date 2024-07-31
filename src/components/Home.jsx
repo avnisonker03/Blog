@@ -62,7 +62,14 @@ export default function Home() {
             }
         });
     }, []);
-
+    
+    useEffect(() => {
+        console.log("User Data in Home:", userData); // Ensure userData is available
+        if (userData) {
+            navigate("/all-posts");
+        }
+    }, [userData, navigate]);
+    
     const handleExploreClick = () => {
         if (userData) {
             navigate("/all-posts");

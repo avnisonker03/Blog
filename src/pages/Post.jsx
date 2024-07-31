@@ -50,7 +50,7 @@ export default function Post() {
                     <img
                         src={appwriteService.getFilePreview(post.featuredImage)}
                         alt={post.title}
-                        className="rounded h-80"
+                        className="rounded h-60 w-80"
                     />
                     {isAuthor && (
                         <div className="absolute right-6 top-4">
