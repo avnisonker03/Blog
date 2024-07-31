@@ -20,7 +20,6 @@ export class AuthService {
             const userAccount = await this.account.create(ID.unique(), email, password, name);
             if (userAccount) {
                 const loginResult = await this.login({ email, password });
-                window.location.reload();
                 return loginResult; // Return session and user data
             }
         } catch (err) {
@@ -31,7 +30,6 @@ export class AuthService {
         try {
             const session = await this.account.createEmailPasswordSession(email, password);
             const user = await this.account.get(); 
-            window.location.reload();
             // Retrieve user data after login
             return { session, user };
         } catch (err) {
