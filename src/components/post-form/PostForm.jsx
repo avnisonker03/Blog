@@ -23,7 +23,7 @@ function PostForm({ post }) {
             console.error("User data is not available");
             return;
         }
-
+       // console.log("userdata",userData)
         try {
             // Upload content as a file
             const contentFileId = await appwriteService.uploadContentFile(data.content);
@@ -37,24 +37,28 @@ function PostForm({ post }) {
                 if (file) {
                     await appwriteService.deleteFile(post.featuredImage);
                 }
-
+               console.log(contentFileId)
                 const dbPost = await appwriteService.updatePost(post.$id, {
                     ...data,
                     contentFileId, // Use the file ID instead of content
                     featuredImage: file ? file.$id : post.featuredImage,
                 });
-
+                console.log("update post se bhr")
                 if (dbPost) {
+                    console.log("Edit in postfrom")
                     navigate(`/post/${dbPost.$id}`);
                 }
             } else {
                 const file = await appwriteService.uploadFile(data.image[0]);
                 if (file) {
+                    console.log("userdata",userData)
+                    console.log("in postform useriD",userData,userData.userData.$id);
                     const fileId = file.$id;
                     data.featuredImage = fileId;
                     const dbPost = await appwriteService.createPost({
                         ...data,
-                        userId: userData.$id,
+                        // userId: userData.$id,
+                        userId:userData.userData.$id,
                         content: contentFileId, // Use the file ID instead of content
                     });
 

@@ -12,8 +12,11 @@ export default function Post() {
     const navigate = useNavigate();
 
     const userData = useSelector((state) => state.auth.userData);
+    //console.log("userData in post",userData)
 
-    const isAuthor = post && userData ? post.userId === userData.$id : false;
+    const isAuthor = post && userData ? post.userId === userData.userData.$id : false;
+    console.log("post id",post?.userId);
+    console.log("isAuthot",isAuthor)
 
     useEffect(() => {
         const fetchPost = async () => {
@@ -55,9 +58,9 @@ export default function Post() {
                     {isAuthor && (
                         <div className="absolute right-6 top-4">
                             <Link to={`/edit-post/${post.$id}`}>
-                                {/* <Button bgColor="bg-green-600" className="mr-3 hover:bg-green-400">
+                                <Button bgColor="bg-green-600" className="mr-3 hover:bg-green-400">
                                     Edit
-                                </Button> */}
+                                </Button>
                             </Link>
                             <Button bgColor="bg-red-600" className="hover:bg-red-400" onClick={deletePost}>
                                 Delete

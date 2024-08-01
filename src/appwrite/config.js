@@ -61,10 +61,10 @@ async createPost({title, slug, content, featuredImage, status, userId}) {
             throw new Error('Invalid slug after formatting. It must contain valid characters and be non-empty.');
         }
 
-       // console.log("Uploading content...");
+       console.log("Uploading content...");
         const contentFileId = await this.uploadContentFile(content);
-       // console.log("Content uploaded, file ID:", contentFileId);
-
+       console.log("Content uploaded, file ID:", contentFileId);
+       console.log("user id",userId)
         if (!contentFileId) {
             throw new Error('Error uploading content file.');
         }
@@ -88,13 +88,16 @@ async createPost({title, slug, content, featuredImage, status, userId}) {
 
 async updatePost(slug, { title, contentFileId, featuredImage, status }) {
     try {
+        console.log("Uploading content...");
+        const contentFileIdNew = await this.uploadContentFile(contentFileId);
+        console.log("Content uploaded, file ID:", contentFileId);
       return await this.databases.updateDocument(
         conf.appwriteDatabaseId,
         conf.appwriteCollectionId,
         slug,
         {
           title,
-          content: contentFileId, // Ensure this is a string representing the file ID
+          content: contentFileIdNew, // Ensure this is a string representing the file ID
           featuredImage,
           status,
         }
