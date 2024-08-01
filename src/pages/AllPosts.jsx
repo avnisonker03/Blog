@@ -23,7 +23,7 @@ export default function AllPosts() {
                         <span className="visually-hidden text-white text-3xl">Loading...</span>
                     </div>
                 ) : (
-                    <div className="flex flex-wrap md:flex-row flex-col gap-1 justify-center">
+                    <div className="flex flex-wrap md:flex-row flex-col gap-4 justify-center">
                         {posts.length === 0 ? (
                             <div className="w-full flex justify-center items-center">
                                 <span className="text-white text-3xl">No posts to show</span>

@@ -54,8 +54,8 @@ async createPost({title, slug, content, featuredImage, status, userId}) {
         let uniqueSlug = `${formattedSlug}-${randomString}`;
         uniqueSlug = uniqueSlug.slice(0, 36);
         
-        console.log("Formatted Slug:", formattedSlug);
-        console.log("Unique Slug:", uniqueSlug);
+        // console.log("Formatted Slug:", formattedSlug);
+        // console.log("Unique Slug:", uniqueSlug);
 
         if (!formattedSlug) {
             throw new Error('Invalid slug after formatting. It must contain valid characters and be non-empty.');
