@@ -6,6 +6,7 @@ const Input=React.forwardRef(
         label,
         type="text",
         className="",
+        error,
         ...props
     },ref){
         const id=useId()
@@ -26,6 +27,7 @@ const Input=React.forwardRef(
                 {...props}
                 id={id}
                 />
+                {error && <p className="text-lg text-red-600 mb-2">{error.message}</p>}
             </div>
         )
     }

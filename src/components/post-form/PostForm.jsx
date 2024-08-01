@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 function PostForm({ post }) {
-    const { register, handleSubmit, watch, setValue, control, getValues } = useForm({
+    const { register, handleSubmit, watch, setValue, control, getValues,formState: { errors } } = useForm({
         defaultValues: {
             title: post?.title || '',
             slug: post?.$id || '',
@@ -104,7 +104,7 @@ function PostForm({ post }) {
     }, [post, setValue]);
 
     return (
-        <form onSubmit={handleSubmit(submit)} className="flex flex-wrap">
+        <form onSubmit={handleSubmit(submit)} className="flex flex-wrap p-2">
             <div className="w-2/3 px-2">
                 <Input
                     label="Title :"
@@ -112,6 +112,7 @@ function PostForm({ post }) {
                     className="mb-4"
                     autocomplete="title"
                     {...register("title", { required: true })}
+                    error={errors.title}
                 />
                 <Input
                     label="Slug :"
@@ -129,9 +130,10 @@ function PostForm({ post }) {
                 <Input
                     label="Featured Image :"
                     type="file"
-                    className="mb-4"
+                    className="mb-4 text-xs md:text-lg"
                     accept="image/png, image/jpg, image/jpeg, image/gif"
-                    {...register("image", { required: !post })}
+                    {...register("image", { required: !post  ? "Featured image is required" : false })}
+                    error={errors.image}
                 />
                 {post && (
                     <div className="w-full mb-4">
@@ -147,6 +149,7 @@ function PostForm({ post }) {
                     label="Status"
                     className="mb-4"
                     {...register("status", { required: true })}
+                    error={errors.status} 
                 />
                 <Button type="submit" bgColor={post ? "bg-green-600" : undefined} className="w-full hover:bg-green-400">
                     {post ? "Update" : "Submit"}

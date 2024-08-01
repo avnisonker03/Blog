@@ -5,12 +5,14 @@ import PostCard from "./PostCard";
 import appwriteService from "../appwrite/config";
 import { useSelector } from "react-redux";
 
+
 export default function Home() {
     const [posts, setPosts] = useState([]);
     const [displayedText, setDisplayedText] = useState("");
     const [currentMessageIndex, setCurrentMessageIndex] = useState(0);
     const [charIndex, setCharIndex] = useState(0);
     const [isTyping, setIsTyping] = useState(true);
+ 
 
     const navigate = useNavigate();
     const userData = useSelector((state) => state.auth.userData);
@@ -64,7 +66,7 @@ export default function Home() {
     }, []);
     
     useEffect(() => {
-        console.log("User Data in Home:", userData); // Ensure userData is available
+        // console.log("User Data in Home:", userData); // Ensure userData is available
         if (userData) {
             navigate("/all-posts");
         }
@@ -77,7 +79,6 @@ export default function Home() {
             navigate("/login");
         }
     };
-    const displayedPosts = posts.slice(0, 8);
 
     if (posts.length === 0) {
         return (
@@ -90,7 +91,7 @@ export default function Home() {
     }
 
     return (
-        <div className="md:flex-row flex flex-col items-center mt-4 md:mt-0 overflow-x-hidden">
+        <div className="flex flex-col justify-center items-center mx-auto my-auto mt-8 md:mt-0 overflow-x-hidden">
             <div className="md:w-full w-full max-w-3xl text-center">
                 <div className="text-pink-300">
                     <h1 className="font-semibold md:text-4xl text-2xl p-4">{displayedText}</h1>
@@ -106,7 +107,7 @@ export default function Home() {
             <div className="md:w-3/4 w-full mt-8 p-4">
                 <Container>
                     <div className="flex flex-wrap md:flex-row flex-col md:mt-0 mt-4">
-                        {displayedPosts.map((post) => (
+                        {posts.map((post) => (
                             <div key={post.$id} className="p-2 md:w-1/4 w-full hover:cursor-pointer">
                                 <PostCard {...post} />
                             </div>

@@ -44,7 +44,6 @@ export class AuthService {
         } catch (err) {
             throw err;
         }
-        return null;
     }
 
     async logout() {
