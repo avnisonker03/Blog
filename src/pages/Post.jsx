@@ -12,11 +12,12 @@ export default function Post() {
     const navigate = useNavigate();
 
     const userData = useSelector((state) => state.auth.userData);
-    //console.log("userData in post",userData)
+    
 
-    const isAuthor = post && userData ? post.userId === userData.userData.$id : false;
+    const isAuthor = post && userData ? post.userId === userData?.$id : false;
     console.log("post id",post?.userId);
     console.log("isAuthot",isAuthor)
+    console.log("userid",userData.$id)
 
     useEffect(() => {
         const fetchPost = async () => {
