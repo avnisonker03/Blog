@@ -108,7 +108,7 @@ export default function Home() {
                 <Container>
                     <div className="flex flex-wrap md:flex-row flex-col md:mt-0 mt-4">
                         {posts.map((post) => (
-                            <div key={post.$id} className="p-2 md:w-1/4 w-full hover:cursor-pointer">
+                            <div key={post.$id} className="p-4 md:w-1/4 w-full hover:cursor-pointer">
                                 <PostCard {...post} />
                             </div>
                         ))}

@@ -13,14 +13,13 @@ export default function Post() {
 
     const userData = useSelector((state) => state.auth.userData);
     
-
-    const isAuthor = post && userData ? post.userId === userData?.$id : false;
-    console.log("post id",post?.userId);
-    console.log("isAuthot",isAuthor)
-    console.log("userid",userData.$id)
-
     useEffect(() => {
         const fetchPost = async () => {
+            if (!userData) {
+                navigate("/login");
+                return;
+            }
+
             if (slug) {
                 const fetchedPost = await appwriteService.getPost(slug);
                 if (fetchedPost) {
@@ -36,8 +35,35 @@ export default function Post() {
         };
 
         fetchPost();
-    }, [slug, navigate]);
+    }, [slug, navigate, userData]);
+    if (!userData) {
+        return null; // Return null to prevent rendering until user is logged in
+    }
 
+    const isAuthor = post && userData ? post.userId === userData?.$id : false;
+    console.log("post id",post?.userId);
+    console.log("isAuthot",isAuthor)
+    console.log("userid",userData.$id)
+
+    // useEffect(() => {
+    //     const fetchPost = async () => {
+    //         if (slug) {
+    //             const fetchedPost = await appwriteService.getPost(slug);
+    //             if (fetchedPost) {
+    //                 setPost(fetchedPost);
+    //                 const contentText = await appwriteService.getFileContent(fetchedPost.content);
+    //                 setContent(contentText);
+    //             } else {
+    //                 navigate("/");
+    //             }
+    //         } else {
+    //             navigate("/");
+    //         }
+    //     };
+
+    //     fetchPost();
+    // }, [slug, navigate]);
+    
     const deletePost = () => {
         appwriteService.deletePost(post.$id).then((status) => {
             if (status) {
